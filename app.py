@@ -479,30 +479,37 @@ def page_principale():
                 f"{int(analyses['totaux_globaux'][f'cout_total_{systeme_comp}']):,} MAD",
                 delta=f"{diff_cout_total_pct:.2f}%"
             )
-        # Create data for the DataFrame
-        data_primes = [
-            {
-                "Prime moyenne de conducteur par": "jour",
-                "Système actuel": int(analyses['totaux_globaux'][f'bonus_cond_jour_{systeme_base}']),
-                "Nouveau système": int(analyses['totaux_globaux'][f'bonus_cond_jour_{systeme_comp}'])
-            },
-            {
-                "Prime moyenne de conducteur par": "mois",
-                "Système actuel": int(analyses['totaux_globaux'][f'bonus_cond_mois_{systeme_base}']),
-                "Nouveau système": int(analyses['totaux_globaux'][f'bonus_cond_mois_{systeme_comp}'])
-            },
-            {
-                "Prime moyenne de conducteur par": "année",
-                "Système actuel": int(analyses['totaux_globaux'][f'bonus_cond_an_{systeme_base}']),
-                "Nouveau système": int(analyses['totaux_globaux'][f'bonus_cond_an_{systeme_comp}'])
-            }
-        ]
+        # Create the DataFrame with index
+        df = pd.DataFrame({
+            "Système actuel": [
+                int(analyses['totaux_globaux'][f'bonus_cond_jour_{systeme_base}']),
+                int(analyses['totaux_globaux'][f'bonus_cond_mois_{systeme_base}']),
+                int(analyses['totaux_globaux'][f'bonus_cond_an_{systeme_base}'])
+            ],
+            "Nouveau système": [
+                int(analyses['totaux_globaux'][f'bonus_cond_jour_{systeme_comp}']),
+                int(analyses['totaux_globaux'][f'bonus_cond_mois_{systeme_comp}']),
+                int(analyses['totaux_globaux'][f'bonus_cond_an_{systeme_comp}'])
+            ]
+        }, index=["jour", "mois", "année"])
         
-        # Create DataFrame
-        df_primes = pd.DataFrame(data_primes)
-        st.write("fnerfn")
+        # Rename the index
+        df.index.name = "Prime moyenne de conducteur par"
+        
+        # Create styled DataFrame
+        styler = df.style\
+            .set_properties(**{'text-align': 'center'})\
+            .format("{:,.0f} MAD")\
+            .set_table_styles([{
+                'selector': 'th.row_heading',
+                'props': [('color', 'blue'), ('text-align', 'center')]
+            }, {
+                'selector': 'th.col_heading',
+                'props': [('text-align', 'center')]
+            }])
+        
         # Display in Streamlit
-        st.dataframe(df_primes)
+        st.write(styler.to_html(), unsafe_allow_html=True)
 
         # Afficher la différence en pourcentage
         st.info(
