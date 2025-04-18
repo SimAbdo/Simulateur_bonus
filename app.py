@@ -139,7 +139,7 @@ def page_configuration_systemes():
                 if st.button("🗑️", key=f"suppr_actuel_{idx}"):
                     paliers_df = paliers_df.drop(idx).reset_index(drop=True)
                     st.session_state.systemes_personnalises["systeme_actuel"][
-                        "paliers"] = paliers_df.values.tolist()
+                        "paliers"] = paliers_df.to_dict('records')
                     st.rerun()
 
         # Bouton pour ajouter un nouveau palier
@@ -162,11 +162,11 @@ def page_configuration_systemes():
                 [paliers_df, pd.DataFrame([nouveau_palier])],
                 ignore_index=True)
             st.session_state.systemes_personnalises["systeme_actuel"][
-                "paliers"] = paliers_df.values.tolist()
+                "paliers"] = paliers_df.to_dict('records')
             st.rerun()
 
         # Mettre à jour les paliers dans la session
-        systeme_actuel["paliers"] = paliers_df.values.tolist()
+        systeme_actuel["paliers"] = paliers_df.to_dict('records')
 
     with tab2:
         st.subheader("Modifier le Nouveau Système")
@@ -263,7 +263,7 @@ def page_configuration_systemes():
             st.rerun()
 
         # Mettre à jour les paliers dans la session
-        systeme_nouveau["paliers"] = paliers_df.values.tolist()
+        systeme_nouveau["paliers"] = paliers_df.to_dict('records')
 
     # Boutons pour la navigation et actions
     st.markdown("---")
