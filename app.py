@@ -112,7 +112,7 @@ def page_configuration_systemes():
 
             with col2:
                 # Conversion sécurisée en entier, en gérant les NaN et Inf
-                max_val = 1000000
+                max_val = 249
                 if not pd.isna(palier["max_voyageurs"]
                                ) and palier["max_voyageurs"] != float('inf'):
                     max_val = int(palier["max_voyageurs"])
@@ -214,7 +214,7 @@ def page_configuration_systemes():
 
             with col2:
                 # Conversion sécurisée en entier, en gérant les NaN et Inf
-                max_val = 1000000
+                max_val = 249
                 if not pd.isna(palier["max_voyageurs"]
                                ) and palier["max_voyageurs"] != float('inf'):
                     max_val = int(palier["max_voyageurs"])
@@ -262,7 +262,7 @@ def page_configuration_systemes():
 
             nouveau_palier = {
                 "min_voyageurs": nouveau_min,
-                "max_voyageurs": float('inf'),
+                "max_voyageurs": float(10000),
                 "taux": 0.1
             }
             paliers_df = pd.concat(
@@ -358,7 +358,7 @@ def page_principale():
             "Nombre de services par jour",
             min_value=1,
             max_value=20,
-            value=2,  # Changé de 5 à 2 comme demandé
+            value=2,  
             help=
             "Nombre moyen de services (trajets) par jour pour chaque conducteur"
         )
