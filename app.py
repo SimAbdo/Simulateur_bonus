@@ -479,34 +479,30 @@ def page_principale():
                 f"{int(analyses['totaux_globaux'][f'cout_total_{systeme_comp}']):,} MAD",
                 delta=f"{diff_cout_total_pct:.2f}%"
             )
-        col6, col7 = st.columns(2)
-        with col6:
-            st.metric(
-                f"Bonus moyen par conducteur/jour - {systemes_actifs[0]['nom']}",
-                f"{analyses['totaux_globaux'][f'bonus_cond_jour_{systeme_base}']:,} MAD"
-            )
-            st.metric(
-                f"Bonus moyen par conducteur/mois - {systemes_actifs[0]['nom']}",
-                f"{analyses['totaux_globaux'][f'bonus_cond_mois_{systeme_base}']:,} MAD"
-            )
-            st.metric(
-                f"Bonus moyen par conducteur/an - {systemes_actifs[0]['nom']}",
-                f"{analyses['totaux_globaux'][f'bonus_cond_an_{systeme_base}']:,} MAD"
-            )
-
-        with col7:
-            st.metric(
-                f"Bonus moyen par conducteur/jour - {systemes_actifs[1]['nom']}",
-                f"{analyses['totaux_globaux'][f'bonus_cond_jour_{systeme_comp}']:,} MAD"
-            )
-            st.metric(
-                f"Bonus moyen par conducteur/mois - {systemes_actifs[1]['nom']}",
-                f"{analyses['totaux_globaux'][f'bonus_cond_mois_{systeme_comp}']:,} MAD"
-            )
-            st.metric(
-                f"Bonus moyen par conducteur/an - {systemes_actifs[1]['nom']}",
-                f"{analyses['totaux_globaux'][f'bonus_cond_an_{systeme_comp}']:,} MAD"
-            )
+        # Create data for the DataFrame
+        data_primes = [
+            {
+                "Prime moyenne de conducteur par": "jour",
+                "Système actuel": int(analyses['totaux_globaux'][f'bonus_cond_jour_{systeme_base}']),
+                "Nouveau système": int(analyses['totaux_globaux'][f'bonus_cond_jour_{systeme_comp}'])
+            },
+            {
+                "Prime moyenne de conducteur par": "mois",
+                "Système actuel": int(analyses['totaux_globaux'][f'bonus_cond_mois_{systeme_base}']),
+                "Nouveau système": int(analyses['totaux_globaux'][f'bonus_cond_mois_{systeme_comp}'])
+            },
+            {
+                "Prime moyenne de conducteur par": "année",
+                "Système actuel": int(analyses['totaux_globaux'][f'bonus_cond_an_{systeme_base}']),
+                "Nouveau système": int(analyses['totaux_globaux'][f'bonus_cond_an_{systeme_comp}'])
+            }
+        ]
+        
+        # Create DataFrame
+        df_primes = pd.DataFrame(data_primes)
+        
+        # Display in Streamlit
+        st.dataframe(df_primes)
 
         # Afficher la différence en pourcentage
         st.info(
