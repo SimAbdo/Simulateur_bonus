@@ -462,25 +462,25 @@ def page_principale():
             st.metric("Nombre total de voyageurs par an",
                       f"{int(analyses['totaux_globaux']['VOY_TOTAL']):,}")
 
-        col1, col2, col3 = st.columns(3)
-        with col1:
+        col3, col4, col5 = st.columns(3)
+        with col3:
             st.metric(
                 f"Prime 2024",
                 f"{int(9309650):,} MAD"
             )
-        with col2:
+        with col4:
             st.metric(
                 f"Prime projection PB - {systemes_actifs[0]['nom']}",
                 f"{int(analyses['totaux_globaux'][f'cout_total_{systeme_base}']):,} MAD"
             )
-        with col3:
+        with col5:
           st.metric(
                 f"Prime projection BP - {systemes_actifs[1]['nom']}",
                 f"{int(analyses['totaux_globaux'][f'cout_total_{systeme_comp}']):,} MAD",
                 delta=f"{diff_cout_total_pct:.2f}%"
             )
-        col1, col2 = st.columns(2)
-        with col1:
+        col6, col7 = st.columns(2)
+        with col6:
             st.metric(
                 f"Bonus moyen par conducteur/jour - {systemes_actifs[0]['nom']}",
                 f"{analyses['totaux_globaux'][f'bonus_cond_jour_{systeme_base}']:,} MAD"
@@ -494,7 +494,7 @@ def page_principale():
                 f"{analyses['totaux_globaux'][f'bonus_cond_an_{systeme_base}']:,} MAD"
             )
 
-        with col2:
+        with col7:
             st.metric(
                 f"Bonus moyen par conducteur/jour - {systemes_actifs[1]['nom']}",
                 f"{analyses['totaux_globaux'][f'bonus_cond_jour_{systeme_comp}']:,} MAD"
