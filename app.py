@@ -472,7 +472,7 @@ def page_principale():
             st.metric(
                 f"Prime projection PB - {systemes_actifs[0]['nom']}",
                 f"{int(analyses['totaux_globaux'][f'cout_total_{systeme_base}']):,} MAD",
-                delta=f"{((int(analyses['totaux_globaux'][f'cout_total_{systeme_base}']) - int(9309650)) / int(9309650)):.2f}%"
+                delta=f"{((int(analyses['totaux_globaux'][f'cout_total_{systeme_base}']) - int(9309650)) * 100 / int(9309650)):.2f}%"
             )
         with col5:
           st.metric(
