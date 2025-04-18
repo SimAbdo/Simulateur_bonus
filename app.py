@@ -483,6 +483,7 @@ def page_principale():
         total_annee_prime_24 = 9309650  # MAD
         num_conducteurs = 1286
         total_annee_prime_24_par_conducteur = int(total_annual_prime / num_conducteurs)
+      
         df = pd.DataFrame({
           "Prime 2024": [
                 int(total_annee_prime_24_par_conducteur / 365),
