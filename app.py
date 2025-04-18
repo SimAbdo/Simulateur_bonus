@@ -538,34 +538,34 @@ def page_principale():
 
         st.altair_chart(chart, use_container_width=True)
 
-        # Graphique des bonus moyens par conducteur
-        st.subheader("Comparaison des bonus moyens par conducteur")
+        # # Graphique des bonus moyens par conducteur
+        # st.subheader("Comparaison des bonus moyens par conducteur")
 
-        # Créer des données pour le graphique des bonus moyens
-        chart_data_cond = pd.DataFrame({
-            'Période': ['Par Jour', 'Par Mois', 'Par An'] * 2,
-            'Système':
-            [systemes_actifs[0]['nom']] * 3 + [systemes_actifs[1]['nom']] * 3,
-            'Bonus moyen (MAD)': [
-                analyses['totaux_globaux'][f"bonus_cond_jour_{systeme_base}"],
-                analyses['totaux_globaux'][f"bonus_cond_mois_{systeme_base}"],
-                analyses['totaux_globaux'][f"bonus_cond_an_{systeme_base}"],
-                analyses['totaux_globaux'][f"bonus_cond_jour_{systeme_comp}"],
-                analyses['totaux_globaux'][f"bonus_cond_mois_{systeme_comp}"],
-                analyses['totaux_globaux'][f"bonus_cond_an_{systeme_comp}"]
-            ]
-        })
+        # # Créer des données pour le graphique des bonus moyens
+        # chart_data_cond = pd.DataFrame({
+        #     'Période': ['Par Jour', 'Par Mois', 'Par An'] * 2,
+        #     'Système':
+        #     [systemes_actifs[0]['nom']] * 3 + [systemes_actifs[1]['nom']] * 3,
+        #     'Bonus moyen (MAD)': [
+        #         analyses['totaux_globaux'][f"bonus_cond_jour_{systeme_base}"],
+        #         analyses['totaux_globaux'][f"bonus_cond_mois_{systeme_base}"],
+        #         analyses['totaux_globaux'][f"bonus_cond_an_{systeme_base}"],
+        #         analyses['totaux_globaux'][f"bonus_cond_jour_{systeme_comp}"],
+        #         analyses['totaux_globaux'][f"bonus_cond_mois_{systeme_comp}"],
+        #         analyses['totaux_globaux'][f"bonus_cond_an_{systeme_comp}"]
+        #     ]
+        # })
 
-        # Créer le graphique pour les bonus moyens
-        chart_cond = alt.Chart(chart_data_cond).mark_bar().encode(
-            x=alt.X('Période:N', title='Période'),
-            y=alt.Y('Bonus moyen (MAD):Q', title='Bonus moyen (MAD)'),
-            color=alt.Color('Système:N', legend=alt.Legend(orient="top")),
-            column=alt.Column('Période:N', title=None),
-            tooltip=['Système', 'Période', 'Bonus moyen (MAD)']).properties(
-                title='Comparaison des bonus moyens par conducteur', width=150)
+        # # Créer le graphique pour les bonus moyens
+        # chart_cond = alt.Chart(chart_data_cond).mark_bar().encode(
+        #     x=alt.X('Période:N', title='Période'),
+        #     y=alt.Y('Bonus moyen (MAD):Q', title='Bonus moyen (MAD)'),
+        #     color=alt.Color('Système:N', legend=alt.Legend(orient="top")),
+        #     column=alt.Column('Période:N', title=None),
+        #     tooltip=['Système', 'Période', 'Bonus moyen (MAD)']).properties(
+        #         title='Comparaison des bonus moyens par conducteur', width=150)
 
-        st.altair_chart(chart_cond, use_container_width=True)
+        # st.altair_chart(chart_cond, use_container_width=True)
 
         # Option pour télécharger les résultats
         st.subheader("Données détaillées par ligne")
