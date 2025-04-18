@@ -90,41 +90,36 @@ def page_configuration_systemes():
         st.subheader("Paliers de prime")
 
         # Convertir les paliers en DataFrame pour une meilleure manipulation
-        paliers_df = pd.DataFrame(
-            systeme_actuel["paliers"],
-            columns=["min_voyageurs", "max_voyageurs", "taux"])
+        paliers_df = pd.DataFrame(systeme_actuel["paliers"], 
+                          columns=["min", "max", "taux"])
 
         # Afficher les paliers existants
         for idx, palier in paliers_df.iterrows():
             col1, col2, col3, col4 = st.columns([3, 3, 3, 1])
-
+            
             with col1:
                 # Conversion sécurisée en entier, en gérant les NaN
                 min_val = 0
-                if not pd.isna(palier["min_voyageurs"]):
-                    min_val = int(palier["min_voyageurs"])
-
-                min_v = st.number_input(f"Min Voyageurs (Palier {idx+1})",
-                                        value=min_val,
-                                        min_value=0,
-                                        key=f"min_actuel_{idx}")
-                paliers_df.at[idx, "min_voyageurs"] = min_v
-
+                if not pd.isna(palier["min"]):
+                    min_val = int(palier["min"])
+                
+                min_v = st.number_input(f"Min Voyageurs (Palier {idx+1})", 
+                                      value=min_val,
+                                      min_value=0,
+                                      key=f"min_actuel_{idx}")
+                paliers_df.at[idx, "min"] = int(min_v)
+                
             with col2:
                 # Conversion sécurisée en entier, en gérant les NaN et Inf
-                max_val = 249
-                if not pd.isna(palier["max_voyageurs"]
-                               ) and palier["max_voyageurs"] != float('inf'):
-                    max_val = int(palier["max_voyageurs"])
-
-                max_v = st.number_input(f"Max Voyageurs (Palier {idx+1})",
-                                        value=max_val,
-                                        min_value=int(min_v),
-                                        key=f"max_actuel_{idx}")
-                paliers_df.at[
-                    idx,
-                    "max_voyageurs"] = max_v if max_v < 1000000 else float(
-                        'inf')
+                max_val = 999999
+                if not pd.isna(palier["max"]) and palier["max"] != float('inf'):
+                    max_val = int(palier["max"])
+                
+                max_v = st.number_input(f"Max Voyageurs (Palier {idx+1})", 
+                                      value=max_val,
+                                      min_value=int(min_v),
+                                      key=f"max_actuel_{idx}")
+                paliers_df.at[idx, "max"] = int(max_v) if max_v < 999999 else 999999
 
             with col3:
                 # Conversion sécurisée en float, en gérant les NaN
@@ -159,9 +154,9 @@ def page_configuration_systemes():
                 nouveau_min = 0
 
             nouveau_palier = {
-                "min_voyageurs": nouveau_min,
-                "max_voyageurs": float('inf'),
-                "taux": 0.1
+                  "min": nouveau_min, 
+                 "max": 999999, 
+                 "taux": 0.1}
             }
             paliers_df = pd.concat(
                 [paliers_df, pd.DataFrame([nouveau_palier])],
@@ -192,41 +187,36 @@ def page_configuration_systemes():
         st.subheader("Paliers de prime")
 
         # Convertir les paliers en DataFrame pour une meilleure manipulation
-        paliers_df = pd.DataFrame(
-            systeme_nouveau["paliers"],
-            columns=["min_voyageurs", "max_voyageurs", "taux"])
+        paliers_df = pd.DataFrame(systeme_nouveau["paliers"], 
+                          columns=["min", "max", "taux"])
 
         # Afficher les paliers existants
         for idx, palier in paliers_df.iterrows():
             col1, col2, col3, col4 = st.columns([3, 3, 3, 1])
-
+            
             with col1:
                 # Conversion sécurisée en entier, en gérant les NaN
                 min_val = 0
-                if not pd.isna(palier["min_voyageurs"]):
-                    min_val = int(palier["min_voyageurs"])
-
-                min_v = st.number_input(f"Min Voyageurs (Palier {idx+1})",
-                                        value=min_val,
-                                        min_value=0,
-                                        key=f"min_nouveau_{idx}")
-                paliers_df.at[idx, "min_voyageurs"] = min_v
-
+                if not pd.isna(palier["min"]):
+                    min_val = int(palier["min"])
+                
+                min_v = st.number_input(f"Min Voyageurs (Palier {idx+1})", 
+                                      value=min_val,
+                                      min_value=0,
+                                      key=f"min_nouveau_{idx}")
+                paliers_df.at[idx, "min"] = int(min_v)
+                
             with col2:
                 # Conversion sécurisée en entier, en gérant les NaN et Inf
-                max_val = 249
-                if not pd.isna(palier["max_voyageurs"]
-                               ) and palier["max_voyageurs"] != float('inf'):
-                    max_val = int(palier["max_voyageurs"])
-
-                max_v = st.number_input(f"Max Voyageurs (Palier {idx+1})",
-                                        value=max_val,
-                                        min_value=int(min_v),
-                                        key=f"max_nouveau_{idx}")
-                paliers_df.at[
-                    idx,
-                    "max_voyageurs"] = max_v if max_v < 1000000 else float(
-                        'inf')
+                max_val = 999999
+                if not pd.isna(palier["max"]) and palier["max"] != float('inf'):
+                    max_val = int(palier["max"])
+                
+                max_v = st.number_input(f"Max Voyageurs (Palier {idx+1})", 
+                                      value=max_val,
+                                      min_value=int(min_v),
+                                      key=f"max_nouveau_{idx}")
+                paliers_df.at[idx, "max"] = int(max_v) if max_v < 999999 else 999999
 
             with col3:
                 # Conversion sécurisée en float, en gérant les NaN
@@ -261,9 +251,9 @@ def page_configuration_systemes():
                 nouveau_min = 0
 
             nouveau_palier = {
-                "min_voyageurs": nouveau_min,
-                "max_voyageurs": float(10000),
-                "taux": 0.1
+                  "min": nouveau_min, 
+                 "max": 999999, 
+                 "taux": 0.1}
             }
             paliers_df = pd.concat(
                 [paliers_df, pd.DataFrame([nouveau_palier])],
@@ -384,7 +374,7 @@ def page_principale():
                 # Afficher les paliers sous forme de tableau
                 paliers_df = pd.DataFrame(systeme['paliers'])
                 paliers_df.columns = [
-                    "Min Voyageurs", "Max Voyageurs", "Taux (MAD)"
+                    "Min", "Max", "Taux (MAD)"
                 ]
                 st.dataframe(paliers_df)
 
@@ -627,7 +617,7 @@ def page_principale():
             # Ajouter les détails des systèmes de prime
             sys_actuel_df = pd.DataFrame(
                 systemes_actifs[0]['paliers'],
-                columns=["Min Voyageurs", "Max Voyageurs", "Taux (MAD)"])
+                columns=["Min", "Max", "Taux (MAD)"])
             sys_actuel_df.to_excel(
                 writer,
                 sheet_name=f'Système {systemes_actifs[0]["nom"]}',
@@ -635,7 +625,7 @@ def page_principale():
 
             sys_nouveau_df = pd.DataFrame(
                 systemes_actifs[1]['paliers'],
-                columns=["Min Voyageurs", "Max Voyageurs", "Taux (MAD)"])
+                columns=["Min", "Max", "Taux (MAD)"])
             sys_nouveau_df.to_excel(
                 writer,
                 sheet_name=f'Système {systemes_actifs[1]["nom"]}',
