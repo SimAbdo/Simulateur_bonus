@@ -454,47 +454,58 @@ def page_principale():
         st.subheader("KPIs Principaux")
 
         # Utiliser des colonnes pour afficher les KPIs (au lieu d'un tableau)
-        col1, col2, col3 = st.columns(3)
+        col1, col2 = st.columns(2)
 
         with col1:
             st.metric("Nombre de lignes", f"{len(df_resultat)}")
+        with col2:
             st.metric("Nombre total de voyageurs par an",
                       f"{int(analyses['totaux_globaux']['VOY_TOTAL']):,}")
 
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric(
+                f"Prime 2024",
+                f"{int(9309650):,} MAD"
+            )
         with col2:
             st.metric(
-                f"Somme totale des bonus - {systemes_actifs[0]['nom']}",
+                f"Prime projection PB - {systemes_actifs[0]['nom']}",
                 f"{int(analyses['totaux_globaux'][f'cout_total_{systeme_base}']):,} MAD"
             )
+        with col3:
+          st.metric(
+                f"Prime projection BP - {systemes_actifs[1]['nom']}",
+                f"{int(analyses['totaux_globaux'][f'cout_total_{systeme_comp}']):,} MAD",
+                delta=f"{diff_cout_total_pct:.2f}%"
+            )
+        col1, col2 = st.columns(2)
+        with col1:
             st.metric(
                 f"Bonus moyen par conducteur/jour - {systemes_actifs[0]['nom']}",
-                f"{analyses['totaux_globaux'][f'bonus_cond_jour_{systeme_base}']:,.2f} MAD"
+                f"{analyses['totaux_globaux'][f'bonus_cond_jour_{systeme_base}']:,} MAD"
             )
             st.metric(
                 f"Bonus moyen par conducteur/mois - {systemes_actifs[0]['nom']}",
-                f"{analyses['totaux_globaux'][f'bonus_cond_mois_{systeme_base}']:,.2f} MAD"
+                f"{analyses['totaux_globaux'][f'bonus_cond_mois_{systeme_base}']:,} MAD"
             )
             st.metric(
                 f"Bonus moyen par conducteur/an - {systemes_actifs[0]['nom']}",
-                f"{analyses['totaux_globaux'][f'bonus_cond_an_{systeme_base}']:,.2f} MAD"
+                f"{analyses['totaux_globaux'][f'bonus_cond_an_{systeme_base}']:,} MAD"
             )
 
-        with col3:
-            st.metric(
-                f"Somme totale des bonus - {systemes_actifs[1]['nom']}",
-                f"{int(analyses['totaux_globaux'][f'cout_total_{systeme_comp}']):,} MAD"
-            )
+        with col2:
             st.metric(
                 f"Bonus moyen par conducteur/jour - {systemes_actifs[1]['nom']}",
-                f"{analyses['totaux_globaux'][f'bonus_cond_jour_{systeme_comp}']:,.2f} MAD"
+                f"{analyses['totaux_globaux'][f'bonus_cond_jour_{systeme_comp}']:,} MAD"
             )
             st.metric(
                 f"Bonus moyen par conducteur/mois - {systemes_actifs[1]['nom']}",
-                f"{analyses['totaux_globaux'][f'bonus_cond_mois_{systeme_comp}']:,.2f} MAD"
+                f"{analyses['totaux_globaux'][f'bonus_cond_mois_{systeme_comp}']:,} MAD"
             )
             st.metric(
                 f"Bonus moyen par conducteur/an - {systemes_actifs[1]['nom']}",
-                f"{analyses['totaux_globaux'][f'bonus_cond_an_{systeme_comp}']:,.2f} MAD"
+                f"{analyses['totaux_globaux'][f'bonus_cond_an_{systeme_comp}']:,} MAD"
             )
 
         # Afficher la différence en pourcentage
