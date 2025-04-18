@@ -16,13 +16,6 @@ def obtenir_structure_csv():
     - VOY/SERVICE/J : Nombre de voyageurs par service par jour
     - NBRE CONDUCTEURS ETP : Nombre de conducteurs moyen par jour par ligne
     
-    Exemple de contenu:
-    
-    LIGNE,VOY,BUS,VOY/SERVICE/J,NBRE CONDUCTEURS ETP
-    L1,2500000,10,250,15
-    L2,1800000,8,180,12
-    L3,3200000,14,320,20
-    L4,1200000,5,120,8
     """
     return structure
 
