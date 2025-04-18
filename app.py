@@ -254,7 +254,7 @@ def page_configuration_systemes():
                   "min": nouveau_min, 
                  "max": 999999, 
                  "taux": 0.1}
-            }
+            
             paliers_df = pd.concat(
                 [paliers_df, pd.DataFrame([nouveau_palier])],
                 ignore_index=True)
