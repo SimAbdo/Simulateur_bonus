@@ -463,8 +463,8 @@ def page_principale():
 
         with col2:
             st.metric(
-                f"Somme totale des bonus - {systemes_actifs[0]['nom']}",
-                f"{analyses['totaux_globaux'][f'cout_total_{systeme_base}']:,.2f} MAD"
+                f"Somme totale des bonus - {int(systemes_actifs[0]['nom'])}",
+                f"{analyses['totaux_globaux'][f'cout_total_{int(systeme_base}']:,.2f)} MAD"
             )
             st.metric(
                 f"Bonus moyen par conducteur/jour - {systemes_actifs[0]['nom']}",
