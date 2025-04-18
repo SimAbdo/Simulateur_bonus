@@ -46,7 +46,7 @@ def page_connexion():
 
         if st.button("Se connecter"):
             # Vérification des identifiants spécifiques
-            if username == "aas" and password == "admin1234":
+            if username == "abdessamad.amoussas" and password == "admin1234":
                 st.session_state.authenticated = True
                 st.session_state.username = username
                 st.rerun()
