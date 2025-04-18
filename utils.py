@@ -19,9 +19,9 @@ SYSTEME_NOUVEAU = {
     "nom":
     "Nouveau Système",
     "description":
-    "Prime par paliers: 0-249: 0.10 MAD, 250-319: 0.25 MAD, 320-369: 0.50 MAD, 370-419: 0.70 MAD, 420+: 1.00 MAD",
+    "Prime par paliers (par exemple: 0-249: 0.10 MAD, 250-319: 0.25 MAD, 320-369: 0.50 MAD, 370-419: 0.70 MAD, 420+: 1.00 MAD)",
     "paliers": [{
-        "min": 0,
+        "min": 1,
         "max": 249,
         "taux": 0.10
     }, {
