@@ -496,20 +496,34 @@ def page_principale():
         # Rename the index
         df.index.name = "Prime moyenne de conducteur par"
         
-        # Create styled DataFrame
-        styler = df.style\
-            .set_properties(**{'text-align': 'center'})\
-            .format("{:,.0f} MAD")\
-            .set_table_styles([{
-                'selector': 'th.row_heading',
-                'props': [('color', 'blue'), ('text-align', 'center')]
-            }, {
-                'selector': 'th.col_heading',
-                'props': [('text-align', 'center')]
-            }])
-        
-        # Display in Streamlit
-        st.write(styler.to_html(), unsafe_allow_html=True)
+        # Create styled DataFrame (from previous step)
+styler = df.style\
+    .set_properties(**{'text-align': 'center'})\
+    .format("{:,.0f} MAD")\
+    .set_table_styles([
+        {
+            'selector': 'th.row_heading',
+            'props': [('color', 'blue'), ('text-align', 'center')]
+        },
+        {
+            'selector': 'th.col_heading',
+            'props': [('text-align', 'center')]
+        },
+        {
+            'selector': '', 
+            'props': [('margin-left', 'auto'), ('margin-right', 'auto')]
+        }
+    ])
+
+# Create centered container
+centered_table = f"""
+<div style="display: flex; justify-content: center;">
+    {styler.to_html()}
+</div>
+"""
+
+# Display in Streamlit
+st.write(centered_table, unsafe_allow_html=True)
 
         # Afficher la différence en pourcentage
         st.info(
