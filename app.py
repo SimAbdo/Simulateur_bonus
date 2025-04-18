@@ -471,7 +471,8 @@ def page_principale():
         with col4:
             st.metric(
                 f"Prime projection PB - {systemes_actifs[0]['nom']}",
-                f"{int(analyses['totaux_globaux'][f'cout_total_{systeme_base}']):,} MAD"
+                f"{int(analyses['totaux_globaux'][f'cout_total_{systeme_base}']):,} MAD",
+                delta=f"{((int(analyses['totaux_globaux'][f'cout_total_{systeme_base}']) - int(9309650)) / int(9309650)):.2f}%"
             )
         with col5:
           st.metric(
@@ -527,8 +528,7 @@ def page_principale():
         # Create centered container
         centered_table = f"""
         <div style="display: flex; justify-content: center;">
-            {styler.to_html()}
-        </div>
+            {styler.to_html()}</div>
         """
         
         # Display in Streamlit
