@@ -500,7 +500,7 @@ def page_principale():
         
         # Create DataFrame
         df_primes = pd.DataFrame(data_primes)
-        
+        st.write("fnerfn")
         # Display in Streamlit
         st.dataframe(df_primes)
 
