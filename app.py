@@ -480,13 +480,21 @@ def page_principale():
                 delta=f"{diff_cout_total_pct:.2f}%"
             )
         # Create the DataFrame with index
+        total_annee_prime_24 = 9309650  # MAD
+        num_conducteurs = 1286
+        total_annee_prime_24_par_conducteur = int(total_annual_prime / num_conducteurs)
         df = pd.DataFrame({
-            "Système actuel": [
+          "Prime 2024": [
+                int(total_annee_prime_24_par_conducteur / 365),
+                int(total_annee_prime_24_par_conducteur / 12),
+                int(total_annee_prime_24_par_conducteur)
+            ],
+            "Prime projection PB Système actuel": [
                 int(analyses['totaux_globaux'][f'bonus_cond_jour_{systeme_base}']),
                 int(analyses['totaux_globaux'][f'bonus_cond_mois_{systeme_base}']),
                 int(analyses['totaux_globaux'][f'bonus_cond_an_{systeme_base}'])
             ],
-            "Nouveau système": [
+            "Prime projection PB Nouveau système": [
                 int(analyses['totaux_globaux'][f'bonus_cond_jour_{systeme_comp}']),
                 int(analyses['totaux_globaux'][f'bonus_cond_mois_{systeme_comp}']),
                 int(analyses['totaux_globaux'][f'bonus_cond_an_{systeme_comp}'])
