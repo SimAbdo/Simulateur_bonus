@@ -458,9 +458,9 @@ def page_principale():
 
         with col1:
             st.metric("Nombre de lignes", f"{len(df_resultat)}")
-        with col2:
-            st.metric("Nombre total de voyageurs par an",
-                      f"{int(analyses['totaux_globaux']['VOY_TOTAL']):,}")
+        # with col2:
+        #     st.metric("Nombre total de voyageurs par an",
+        #               f"{int(analyses['totaux_globaux']['VOY_TOTAL']):,}")
 
         col3, col4, col5 = st.columns(3)
         with col3:
